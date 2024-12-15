@@ -25,7 +25,7 @@ int main(){
 
     int ans = houseRobber(amount, size, index);
 
-    cout << "Maximum Profit is : " << ans;
+    cout << "Maximum Profit : " << ans;
 
     return 0;
 }
