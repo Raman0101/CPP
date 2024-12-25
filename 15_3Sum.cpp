@@ -31,7 +31,26 @@ vector<vector <int>> triplets(vector<int> &nums){
 
 // BETTER SOLUTION
 vector <vector<int>> triplet2(vector<int> &nums){
-    
+    int size = nums.size();
+    set <vector <int>> unique_triplets;
+
+    for(int i=0; i<size; i++){
+        int tar = -(nums[i]);
+        set<int> s;
+
+        for(int j=i+1; j<size; j++){
+            int third = tar - nums[j];
+
+            if(s.find(third) != s.end()){
+                vector<int> trip = {nums[i], nums[j], third};
+                sort(trip.begin(), trip.end());
+                unique_triplets.insert(trip);
+            }
+            s.insert(third);
+        }
+    }
+    vector <vector<int>> ans(unique_triplets.begin(), unique_triplets.end());
+    return ans;
 }
 
 // FOR EACH LOOP
