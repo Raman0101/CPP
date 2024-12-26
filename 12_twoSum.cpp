@@ -10,12 +10,12 @@ vector<int> twoSum(vector<int> &nums, int target){
         int first = nums[i];
         int sec = target - first;
 
-        if(m.find(sec) != m.end()){
-            ans.push_back(i);
-            ans.push_back(m[sec]);
+        if(m.find(sec) != m.end()){ //Agar map mein mil gaya 
+            ans.push_back(i); // index of current element
+            ans.push_back(m[sec]); // index of searched element
             break;
         }
-        m[first] = i;
+        m[first] = i; // storing index of current element in map
     }
 
     return ans;
