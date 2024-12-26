@@ -58,15 +58,15 @@ vector <vector<int>> triplets4(vector<int> &nums){
     int n = nums.size();
     vector <vector<int>> ans;
 
-    sort(nums.begin(), nums.end());
+    sort(nums.begin(), nums.end()); // Sorting given array
     
-    for(int i=0; i<n; i++){
-        if(i > 0 && nums[i] == nums[i-1]) continue;
+    for(int i=0; i<n; i++){ // tracking first number with this loop
+        if(i > 0 && nums[i] == nums[i-1]) continue; // agar ith aur i+1 wala element same hai toh skip kar raha hu
 
-        int j = i+1;
-        int k = n-1;
+        int j = i+1; // we cant take same element twice so 2nd element will be one next from first
+        int k = n-1; // tracking 3rd element from end
         while(j < k){
-            int sum = nums[i] + nums[j] + nums[k];
+            int sum = nums[i] + nums[j] + nums[k]; // taking sum of all three elements
 
             if(sum < 0){
                 j++;
@@ -74,11 +74,11 @@ vector <vector<int>> triplets4(vector<int> &nums){
             else if(sum > 0){
                 k--;
             }
-            else{
-                ans.push_back({nums[i], nums[j], nums[k]});
+            else{ // mtlb sum zero mil gaya
+                ans.push_back({nums[i], nums[j], nums[k]}); // store kr liya elements
                 j++;
                 k--;
-                while(j < k && nums[j] == nums[j-1]) j++;
+                while(j < k && nums[j] == nums[j-1]) j++; // agar j ko increase krke bhi same value hai next element ki toh skip kar raha hu
             }
         }
     }
