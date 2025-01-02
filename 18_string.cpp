@@ -31,5 +31,32 @@ int main(){
     cin>> str3;
     // we can take the input like this if it is a word
 
+     char str4[12];
+    cin.getline(str4, 12);
+    // here we can take input of a sting that includes space as well
+    // in the function we are taking two parameters string and its size
+
+    cin.getline(str4, 12, '@');
+    // here the 3rd parameter is delimiter
+    // when we will enter the string and when we encounter this character the input terminates there
+
+
+
+    //           STRINGS
+    // Now we have string class where we can create its objects
+    // strings are dynamic in nature
+    string str5 = "hello world";
+    cout << str5 << endl;
+
+    // concatination
+    string str6 = "hello";
+    string str7 = "world";
+    string str8 = str6 + str7;
+    cout << str8 << endl;
+    int length = str6.length();
     
+    string sttr;
+    getline(cin, sttr);
+    
+    return 0;
 }
