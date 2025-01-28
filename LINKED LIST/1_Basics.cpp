@@ -36,6 +36,21 @@ void getLength(node *head){
     cout<< endl << "Length of LL is: " << length<< endl;
 }
 
+void insertAtHead(node* &head, node* &tail, int data){
+    node* temp = head;
+    if(head == NULL){
+        node* newNode = new node(data);
+        head = newNode;
+        tail = newNode;
+    }
+
+    else{
+        node* newNode = new node(data);
+        newNode -> next = head;
+        head = newNode;
+    }
+}
+
 int main(){
     // node a;
     node* head = new node(2);
@@ -51,7 +66,11 @@ int main(){
     fourth -> next = fifth;
     fifth -> next = sixth;
     sixth -> next = NULL;
+    node* tail = sixth;
 
+    Display(head);
+    getLength(head);
+    insertAtHead(head, tail, 100);
     Display(head);
     getLength(head);
     return 0;
