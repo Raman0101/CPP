@@ -19,10 +19,21 @@ class node{
 
 int Display(node *head){
     node * temp = head;
+    cout<< "LL is: " << endl;
     while(temp != NULL){
-        cout << temp->data << " ";
+        cout << temp->data << "->";
         temp = temp->next;
     }
+}
+
+void getLength(node *head){
+    node *temp = head;
+    int length = 0;
+    while(temp != NULL){
+        length++;
+        temp = temp->next;
+    }
+    cout<< endl << "Length of LL is: " << length<< endl;
 }
 
 int main(){
@@ -42,5 +53,6 @@ int main(){
     sixth -> next = NULL;
 
     Display(head);
+    getLength(head);
     return 0;
 }
