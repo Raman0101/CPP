@@ -99,6 +99,88 @@ void insertAtPosition(node* &head, node* &tail, int data, int position){
     }
 }
 
+int getPosition(node* &head, int value){
+    int position = 1;
+    node* temp = head;
+    while(temp != NULL){
+        if(temp->data == value){
+        return position;
+    }
+        position++;
+        temp = temp->next;
+    }
+
+    return -1;
+}
+
+void deleteFromHead(node* &head){
+    node* temp = head;
+    head = head->next;
+    temp->next = NULL;
+    delete temp;
+}
+
+void deleteFromTail(node* &head, node* &tail){
+    node* prev = head;
+        while(prev->next != tail){
+            prev = prev->next;
+        }
+        prev-> next = NULL;
+        delete tail;
+        tail = prev;
+}
+
+void deleteFromPosition(node* head, int position){
+    node* prev = NULL;
+        node* curr = head;
+        while(position != 1){
+            prev = curr;
+            curr = curr->next;
+            position--;
+        }
+        prev->next = curr->next;
+        curr->next = NULL;
+        delete curr;
+}
+
+void deleteNodeByPosition(node* &head, node* &tail, int position){
+
+    // CASE: LL IS EMPTY
+    if(head == NULL){
+        cout<< "LL IS EMPTY, NOTHING TO DELETE."<< endl;
+    }
+
+    // CASE 1: DELETE FROM HEAD
+    else if(position == 1){
+        deleteFromHead(head);
+    }
+    
+    // CASE 2: DELETE FROM TAIL
+    else if(position == getLength(head)){
+        deleteFromTail(head, tail);
+    }
+    
+    // CASE 3: DELETE FROM OTHER POSITION
+    else{
+        deleteFromPosition(head, position);
+    }
+}
+
+void deleteNodeByValue(node* head, node*tail, int value){
+
+    if(head == NULL){
+        cout<< "Linked List is EMPTY!!!!!"<<endl;
+    }
+
+    else if( getPosition(head, value) == -1){
+
+        cout<<"THIS VALUE DOESN'T EXIST"<< endl;
+    }
+    else{
+        deleteNodeByPosition(head, tail, getPosition(head, value));
+    }
+}
+
 int main(){
     node * head = NULL;
     node * tail = NULL;
@@ -109,9 +191,11 @@ int main(){
     insertAtTail(head, tail, 50);
     Display(head);
     
-    insertAtPosition(head, tail, 100, 0);
-    Display(head);
+    // insertAtPosition(head, tail, 100, 0);
+    // Display(head);
 
+    // deleteNodeByValue(head, tail, 100);
+    // Display(head);
 
     // node a;
     // node* head = new node(2);
