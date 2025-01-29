@@ -15,6 +15,10 @@ class node{
             this->data = data;
             this->next = NULL;
         }
+        
+        ~node(){
+            cout<<"Destructor called for: " << this->data<< endl;
+        }
 };
 
 int Display(node *head){
@@ -194,7 +198,7 @@ int main(){
     // insertAtPosition(head, tail, 100, 0);
     // Display(head);
 
-    // deleteNodeByValue(head, tail, 100);
+    // deleteNodeByValue(head, tail, 10);
     // Display(head);
 
     // node a;
