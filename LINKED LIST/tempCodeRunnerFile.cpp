@@ -1,9 +1,15 @@
- // insertAtHead(head, tail, 10);
+insertAtHead(head, tail, 10);
+    // print(head);
+    // cout<< endl;
+
     // insertAtHead(head, tail, 20);
+    // print(head);
+    // cout<< endl;
+
     // insertAtHead(head, tail, 30);
+    // print(head);
+    // cout<< endl;
+
     // insertAtHead(head, tail, 40);
-    // insertAtTail(head, tail, 50);
-    // Display(head);
-    
-    // insertAtPosition(head, tail, 100, 0);
-    // Display(head);
+    // print(head);
+    // cout<< endl;

@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void rotate(vector<int> &row){
+void ReverseRow(vector<int> &row){
     int n = row.size();
 
     int start = 0;
@@ -26,7 +26,7 @@ void RotateMatrix(vector<vector<int>> &matrix){
 
     // ROTATING EACH ROW TO GET THE 90 DEGREE ROTATION
     for(int i=0; i<n; i++){
-        rotate(matrix[i]);
+        ReverseRow(matrix[i]);
     }
 }
 
