@@ -154,6 +154,14 @@ void deleteNodeByPosition(node* &head, node* &tail, int position){
         cout<< "LL IS EMPTY, NOTHING TO DELETE."<< endl;
     }
 
+    // CASE: IF HEAD == TAIL i.e ONLY ONE ELEMENT IN LL
+    else if(head == tail && position == 1){
+        node* temp = head;
+        delete temp;
+        head = NULL;
+        tail = NULL;
+    }
+
     // CASE 1: DELETE FROM HEAD
     else if(position == 1){
         deleteFromHead(head);
