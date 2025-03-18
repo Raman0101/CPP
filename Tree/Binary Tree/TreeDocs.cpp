@@ -51,7 +51,7 @@ void preOrder(node* root){
 
 }
 
-//INORDERTRAVERSAL
+//IN-ORDER-TRAVERSAL
 void inOrder(node* root){
     //Base case
     if(root == NULL) return;
@@ -64,7 +64,7 @@ void inOrder(node* root){
     inOrder(root->right);
 }
 
-//POSTORDERTRAVERSAL
+//POST-ORDER-TRAVERSAL
 void postOrder(node* root){
     //Base case
     if(root == NULL) return;
