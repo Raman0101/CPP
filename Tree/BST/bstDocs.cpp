@@ -69,6 +69,102 @@ void levelOrderTraversal(Node* root){
 
 }
 
+bool isElementPresent(Node* root, int target){
+    if(root == NULL){
+        return false;
+    }
+
+    if(root->data == target){
+        return true;
+    }
+
+    bool rightAns = false;
+    bool leftAns = false;
+
+    if(target > root->data){
+        rightAns = isElementPresent(root->right, target);
+    }
+    else{
+        leftAns = isElementPresent(root->left, target);
+    }
+
+    return leftAns || rightAns;
+}
+
+Node* maxInBST(Node* root){
+    if(root == NULL){
+        return NULL;
+    }
+
+    Node* temp = root;
+
+    while(temp->right != NULL){
+        temp = temp->right;
+    }
+    return temp;
+}
+
+Node* minInBST(Node* root){
+    if(root == NULL){
+        return NULL;
+    }
+
+    Node* temp = root;
+
+    while(temp->left != NULL){
+        temp = temp->left;
+    }
+    return temp;
+}
+
+Node* deleteNodeFromBST(Node* root, int target){
+    if(root == NULL){
+        cout << "element doesn't exists!!!" << endl;
+        return NULL;
+    }
+
+    if(root->data == target){
+        //Case 1: Leaf Node
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        // Case 2: ONLY Left subtree exist 
+        else if(root->left != NULL && root->right == NULL){
+            Node* childSubTree = root->left;
+            delete root;
+            return childSubTree;
+        }
+        //Case 3: ONLY Right subtree exists
+        else if(root->left == NULL && root->right != NULL){
+            Node* childSubTree = root->right;
+            delete root;
+            return childSubTree;
+        }
+        //Case 4: Both Child EXISTS
+        else{
+            // Step 1: find max in left sub tree
+            Node* maxi = maxInBST(root->left);
+
+            // Step 2: replace with root(target)
+            root->data = maxi->data;
+
+            // Step 3: delete maxi from its pos
+            root->left = deleteNodeFromBST(root->left, maxi->data);
+            return root;
+        }
+    }
+
+    if(target < root->data){
+        root->left = deleteNodeFromBST(root->left, target);
+    }
+    else{
+        root->right = deleteNodeFromBST(root->right, target);
+    }
+
+    return root;
+}
+
 int main(){
     Node* root = NULL;
     createBST(root);
