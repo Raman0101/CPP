@@ -97,6 +97,45 @@ void levelOrderTraversal(node* root){
     }
 }
 
+// Vertical Order Traversal of a Binary Tree
+vector<vector<int>> verticalTraversal(node* root) {
+    queue<pair<node*, pair<int, int>>> q;
+    map<int, map<int, multiset<int>>> hdToNodeMap;
+    q.push(make_pair(root, make_pair(0, 0)));
+
+    while(!q.empty()){
+       pair<node*, pair<int, int>> temp = q.front();
+        q.pop();
+
+        node* front = temp.first;
+        int hd = temp.second.first;
+        int level = temp.second.second;
+
+        hdToNodeMap[hd][level].insert(front->data);
+
+        if(front->left != NULL){
+            q.push(make_pair(front->left, make_pair(hd - 1, level + 1)));
+        }
+        if(front->right != NULL){
+            q.push(make_pair(front->right, make_pair(hd + 1, level + 1)));
+        }
+    }
+    vector<vector<int>> ans;
+
+    // Traverse the map and collect the results
+    for (auto it1 = hdToNodeMap.begin(); it1 != hdToNodeMap.end(); ++it1) { 
+        vector<int> col;
+        
+        for (auto it2 = it1->second.begin(); it2 != it1->second.end(); ++it2) { 
+            col.insert(col.end(), it2->second.begin(), it2->second.end()); 
+        }
+        
+        ans.push_back(col);
+    }
+
+    return ans;
+}
+
 //MAX HEIGHT OF TREE
 int height(node* root) {
     if(root == NULL){
@@ -237,7 +276,7 @@ void bottomView(node* root){
             q.push(make_pair(front->left, hd-1));
         }
         if(front->right != NULL){
-            q.push(make_pair(front->right, hd-1));
+            q.push(make_pair(front->right, hd+1));
         }
     }
 

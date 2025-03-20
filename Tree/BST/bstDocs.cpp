@@ -165,6 +165,22 @@ Node* deleteNodeFromBST(Node* root, int target){
     return root;
 }
 
+void convertBSTtoDLL(Node* root, Node* &head){
+
+    if(root == NULL){
+        return;
+    }
+
+    convertBSTtoDLL(root->right, head);
+
+    root->right = head;
+    if(head != NULL)
+        head->left = root;
+    head = root;
+
+    convertBSTtoDLL(root->left, head);
+}
+
 int main(){
     Node* root = NULL;
     createBST(root);
