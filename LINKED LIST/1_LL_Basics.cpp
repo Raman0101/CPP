@@ -193,6 +193,245 @@ void deleteNodeByValue(node* head, node*tail, int value){
     }
 }
 
+node* reverseList(node* head){
+    node* temp = head;
+    node* prev = NULL;
+
+    while(temp != NULL){
+        node* front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+    return prev;
+}
+
+node* middleNode(node* head){
+    node* slow = head;
+    node* fast = head;
+
+    while(fast != NULL && fast->next != NULL){
+
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+node* mergeTwoLists(node* list1, node* list2) {
+    node* dummyNode = new node(-1);
+    node* temp = dummyNode;
+
+    while(list1 != NULL && list2 != NULL){
+        if(list1->data <= list2->data){
+            temp->next = list1;
+            list1 = list1->next;
+        }
+        else{
+            temp->next = list2;
+            list2 = list2->next;
+        }
+
+        temp = temp->next;
+    }
+
+    if(list1 == NULL){
+        temp->next = list2;
+    }
+    else{
+        temp->next = list1;
+    }
+
+    return dummyNode->next;
+}
+
+node* removeNthFromEnd(node* head, int n){
+    node* slow = head;
+    node* fast = head;
+
+    for(int i=0; i<n; i++){
+        fast = fast->next;
+    }
+
+    if(fast == NULL){
+        return head->next;
+    }
+
+    while(fast != NULL){
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    node* delNode = slow->next;
+    slow->next = slow->next->next;
+    delete delNode;
+
+    return head;
+}
+
+void deleteNode(node* Node){
+    // Node mein nextNode ki value store krwa dunga 
+    // Node ke next mein nextNode ka next kr dunga
+    // nextNode ko delete kr dunga
+    Node->data = Node->next->data;
+    node* temp = Node->next;
+    Node->next = temp->next;
+    temp->next = NULL;
+
+    delete temp;
+}
+
+node* sort012(node* head) {
+        
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    
+    node* dummyZero = new node(-1);
+    node* zero = dummyZero;
+    node* dummyOne = new node(-1);
+    node* one = dummyOne;
+    node* dummyTwo = new node(-1);
+    node* two = dummyTwo;
+    
+    node* temp = head;
+    
+    while(temp != NULL){
+        if(temp->data == 0){
+            zero->next = temp;
+            zero = temp;
+        }
+        else if(temp->data == 1){
+            one->next = temp;
+            one = temp;
+        }
+        else{
+            two->next = temp;
+            two = temp;
+        }
+        
+        temp = temp->next;
+    }
+    
+    zero->next = dummyOne->next;
+    one->next = dummyTwo->next;
+    
+    node* newHead = dummyZero->next;
+    
+    delete dummyZero;
+    delete dummyOne;
+    delete dummyTwo;
+    
+    return newHead;
+    
+}
+
+bool hasCycle(node *head) {
+    // map<node*, bool> table;
+
+    // node* temp = head;
+
+    // while(temp != NULL){
+    //     if(table[temp] == false){
+    //         table[temp] = true;
+    //     }
+    //     else{
+    //         return true;
+    //     }
+    //     temp = temp->next;
+    // }
+    // return false;
+    
+
+    //------------approach-2 --------
+    node *slow = head;
+    node *fast = head;
+
+    while(fast != NULL && fast->next != NULL){
+
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast){
+            return true;
+        }
+    }
+    return false;
+}
+
+node *detectCycle(node *head) {
+    node* slow = head;
+    node* fast = head;
+    
+    while(fast != NULL){
+        fast = fast->next;
+
+        if(fast != NULL){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        if(slow == fast){
+            break;
+        }
+    }
+    
+    if(fast == NULL){
+        return NULL;
+    }
+
+    slow = head;
+    while(slow != fast){
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
+
+bool isPalindrome(node* head) {
+    //Midlle Nikalo
+    //Reverse 2nd Half
+    //compare both halves
+    node* middle = middleNode(head);
+    node* head2 = middle->next;
+    middle->next = NULL;
+
+    head2 = reverseList(head2);
+
+    node* temp1 = head;
+    node* temp2 = head2;
+    while(temp1 != NULL && temp2 != NULL){
+        if(temp1->data != temp2->data){
+            return false;
+        }
+        temp1 = temp1->next;
+        temp2 = temp2->next;
+    }
+    return true;
+
+}
+
+node *getIntersectionNode(node *headA, node *headB) {
+    node *d1 = headA;
+    node *d2 = headB;
+
+    while(d1 != d2){
+        d1 = d1 == NULL? headB : d1->next;
+        d2 = d2 == NULL? headA : d2->next;
+    }
+
+    return d1;
+}
+
+node *flattenLL(node *root) {
+    if(root == NULL || root->next == NULL){
+        return root;
+    }
+    
+    node* mergedHead = flattenLL(root->next);
+    
+    return mergeTwoLists(root, mergedHead);
+}
+
 int main(){
     node * head = NULL;
     node * tail = NULL;
